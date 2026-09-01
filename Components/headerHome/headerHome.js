@@ -5,12 +5,12 @@ const headerHome = () => {
     <div className="headerHome">
         <div className="headerHome__container">
             <h1 className="headerHome__title">
-                <ul>
+                <nav>
                     <li>login</li>
                     <li>about me</li>
                     <li>about the website</li>
                     <li>contact</li>
-                </ul>
+                </nav>
             </h1>
 
         </div>
