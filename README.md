@@ -27,3 +27,22 @@ npm run preview
 - `/flashcards/input` — Add flashcards
 - `/notepad` — Notepad
 - `/learn` — Learn mode (placeholder)
+
+## Environment variables
+
+Firebase credentials are stored in `.env.local` (not committed to git).
+
+1. Copy the example file:
+   ```bash
+   cp .env.example .env.local
+   ```
+2. Fill in your Firebase project values from the Firebase Console.
+
+Required variables:
+- `VITE_FIREBASE_API_KEY`
+- `VITE_FIREBASE_AUTH_DOMAIN`
+- `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+- `VITE_FIREBASE_APP_ID`
+- `VITE_FIREBASE_MEASUREMENT_ID`

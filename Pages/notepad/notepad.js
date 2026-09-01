@@ -24,6 +24,32 @@ const Notepad = () => {
     };
   }, []);
 
+  const speakBtn = document.getElementById('speakBtn');
+const userNotes = document.getElementById('userNotes');
+
+speakBtn.addEventListener('click', () => {
+  // Check if browser supports speech synthesis
+  if ('speechSynthesis' in window) {
+    // Stop any ongoing speech
+    window.speechSynthesis.cancel();
+
+    const textToRead = userNotes.value;
+    if (textToRead.trim() === '') return;
+
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    
+    // Optional settings
+    utterance.rate = 1.0; // Speed (0.1 to 10)
+    utterance.pitch = 1.0; // Pitch (0 to 2)
+
+    // Speak the text
+    window.speechSynthesis.speak(utterance);
+  } else {
+    alert('Sorry, your browser does not support read-aloud audio.');
+  }
+});
+
+
   return (
     <div className="notepad">
       <h2>Notepad</h2>
@@ -36,7 +62,9 @@ const Notepad = () => {
             We must test this on at least three different environments.
           </p>
         </div>
-        <textarea placeholder="Write your notes here..." />
+        <textarea className="userNotes" placeholder="Write your notes here..." />
+        <button className="speakBtn">Read Aloud</button>
+
       </div>
     </div>
   );
