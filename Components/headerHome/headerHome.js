@@ -3,10 +3,12 @@ const headerHome = () => {
     <div className="headerHome">
         <div className="headerHome__container">
             <h1 className="headerHome__title">
-                login
-                about me
-                about the website
-                contact
+                <ul>
+                    <li>login</li>
+                    <li>about me</li>
+                    <li>about the website</li>
+                    <li>contact</li>
+                </ul>
             </h1>
 
         </div>
