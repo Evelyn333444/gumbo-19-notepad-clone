@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import googleImg from "../assets/google.png";
+
 import { signInWithGoogle } from "../firebase";
 
 const DontHaveAccount = ({ onClose }) => {
@@ -38,7 +38,7 @@ const DontHaveAccount = ({ onClose }) => {
                     {error && <div className="auth__error">{error}</div>} {/* Display error message */}
                     <button className="btn google__btn--wrapper" onClick={handleGoogleSignUp}>
                         <figure className="google__icon--mask">
-                            <img alt="google" src={googleImg} />
+                            <img alt="google" src="/google.svg" />
                         </figure>
                         <div>Sign up with Google</div>
                     </button>

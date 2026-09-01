@@ -1,3 +1,5 @@
+import loginToggle from "../loginToggle/loginToggle";
+
 const headerHome = () => {
   return (
     <div className="headerHome">

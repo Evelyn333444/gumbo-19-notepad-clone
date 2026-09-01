@@ -1,4 +1,6 @@
-const navbar = () => {
+import { Link } from "react-router-dom";
+
+const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar__container">
@@ -7,14 +9,14 @@ const navbar = () => {
         </div>
         <div className="navbar__menu">
           <ul>
-            <li><a href="/">Notepad</a></li>
-            <li><a href="/about">Flashcards</a></li>
-            <li><a href="/contact">Learn</a></li>
+            <li><Link to="/notepad">Notepad</Link></li>
+            <li><Link to="/flashcards">Flashcards</Link></li>
+            <li><Link to="/learn">Learn</Link></li>
           </ul>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default navbar
+export default Navbar;

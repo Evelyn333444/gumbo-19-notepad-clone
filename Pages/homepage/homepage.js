@@ -2,6 +2,7 @@ const homepage = () => {
   return (
     <div className="homepage">
         <div className="homepage__container">
+            <headerHome />
             <div className="homepage__welcome">
                 <h1 className="homepage__title">Welcome to ??App-Name??</h1>
                 <p className="homepage__description">??App-Name?? is a free study application that allows you to create and manage your study materials. Create flashcards, quizzes, and more to help you study effectively.</p>
@@ -24,6 +25,7 @@ const homepage = () => {
                     To contact me, click on the contact button at the top of bottom of the page, and either write an email or fill out the contact form. I will respond as soon as possible, and I will do my best to help you with your questions or concerns.
                 </p>
             </div>
+            <footerHome />
         </div>
     </div>
   )

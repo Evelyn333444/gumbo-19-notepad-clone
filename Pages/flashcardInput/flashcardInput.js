@@ -1,16 +1,14 @@
-import flashcardFrontTemplate from "../../Components/flashcardFrontTemplate/flashcardFrontTemplate"
-import flashcardBackTemplate from "../../Components/flashcardBackTemplate/flashcardBackTemplate"
+import FlashcardFrontTemplate from "../../Components/flashcardFrontTemplate/flashcardFrontTemplate";
+import FlashcardBackTemplate from "../../Components/flashcardBackTemplate/flashcardBackTemplate";
 
-//This page will show when the user clicks on the "Add flashcards" button on the Flashcard page. It will allow them to input the content for the front and back of the flashcard, and then save it to their study set.
-
-const flashcardInput = () => {
+const FlashcardInput = () => {
   return (
     <div className="flashcardTemplate">
       <h2>Flashcard Template</h2>
-      <flashcardFrontTemplate />
-      <flashcardBackTemplate />
+      <FlashcardFrontTemplate />
+      <FlashcardBackTemplate />
     </div>
-  )
-}
+  );
+};
 
-export default flashcardInput
+export default FlashcardInput;
