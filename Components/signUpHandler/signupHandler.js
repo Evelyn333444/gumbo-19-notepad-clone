@@ -1,25 +1,24 @@
-// src/components/Login.js
+// src/components/SignUp.js
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const result = await signInWithEmailAndPassword(auth, email, password);
-      console.log("Logged in user:", result.user);
-      // Optional: redirect or update app state here
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("New user:", result.user);
     } catch (error) {
-      console.error("Login error:", error.message);
+      console.error("Sign up error:", error.message);
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleSignUp}>
       <input
         type="email"
         value={email}
@@ -34,9 +33,9 @@ const Login = () => {
         placeholder="Password"
         required
       />
-      <button type="submit">Log In</button>
+      <button type="submit">Sign Up</button>
     </form>
   );
 };
 
-export default Login;
+export default SignUp;
