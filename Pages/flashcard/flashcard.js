@@ -1,10 +1,14 @@
 import React from 'react'
 import navbar from '../../Components/navbar/navbar'
-import flashcardTemplate from '../../Components/flashcardFrontTemplate/flashcardFrontTemplate'
+import headerFlash from '../../Components/headerFlash/headerFlash'
+import footerFlash from '../../Components/footerFlash/footerFlash'
+
+//This page will show when the user clicks on the "Flashcards" button on the navbar. It will allow them to view their flashcards, and add, delete, or edit them.
 
 const flashcard = () => {
   return (
     <div className="flashcard">
+        <headerFlash />
       <navbar />
       //add a search bar to search for a specific flashcard.
       <div className="flashcard__container">
@@ -14,7 +18,6 @@ const flashcard = () => {
         <button>Edit flashcards</button>
         //here I want a dropdown menu for collaborators, the creator, and your own view/edit status (not everyones). Also, only show first names, not usernames.
         <div className="flashcard__content">
-            <flashcardTemplate />
             //allow the user to randomize flashcards, show them which ones they got right and wrong, and show them the right answer.
             //add a 'click here' button to see what their percentage of correct answers is, if they want it
             //add an audio feature to read the flashcard aloud, and allow all users (view and edit) to highlight and circle important terms on flashcards.
@@ -22,6 +25,7 @@ const flashcard = () => {
             //Collaborators can communicate on the app, allowing them to share insights of what might be important info to review without interfering with others or the original study set. This will be a chat feature, where users can communicate with each other, and the creator can moderate the chat if they want to.
             //Viewers and editors can chat together, but the creator can set up a chat with editors only.
         </div>
+        <footerFlash />
       </div>      
     </div>
   )
