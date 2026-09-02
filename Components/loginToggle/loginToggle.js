@@ -107,9 +107,6 @@ const LoginToggle = ({ onClose }) => {
             <div className="auth">
                 <div className="auth__content">
                     <div className="auth__title">Log in to ??MyApp??</div>
-                    <div className="auth__separator">
-                        <span className="auth__separator--text">or</span>
-                    </div>
                     <button className="btn google__btn--wrapper" onClick={handleGoogleLogin}>
                         <figure className="google__icon--mask">
                             <img alt="google" src="/google.svg" loading="lazy" style={{ color: "transparent" }} />
