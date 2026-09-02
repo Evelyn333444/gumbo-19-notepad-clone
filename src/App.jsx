@@ -22,3 +22,5 @@ export default function App() {
     </Routes>
   );
 }
+
+//The App.jsx file should contain routes to all the pages that will show on the website

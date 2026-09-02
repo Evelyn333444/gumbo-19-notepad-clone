@@ -1,0 +1,141 @@
+.auth__wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.55);
+  overflow-y: auto;
+}
+
+.auth {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 2rem 1.75rem 1.5rem;
+  margin: auto;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.18);
+}
+
+.auth__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #0f172a;
+}
+
+.auth__separator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.auth__separator::before,
+.auth__separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.auth__main--form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth__main--input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: #0f172a;
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.google__btn--wrapper,
+.guest__btn--wrapper {
+  width: 100%;
+  background: #fff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+}
+
+.auth__forgot--password,
+.auth__switch--btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #334155;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth__close--btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.auth__close--btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.auth__wrapper--overlay {
+  z-index: 1001;
+}
+
+.auth__error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 0.9rem;
+  text-align: center;
+}
