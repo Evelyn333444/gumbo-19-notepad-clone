@@ -1,12 +1,15 @@
+import MediaPreview from "../mediaPreview/mediaPreview";
+
 const FlashcardFrontTemplate = ({
   frontText = "",
   onFrontTextChange,
   onFrontFileChange,
   readOnly = false,
+  frontFile = null,
   frontFileName = null,
   frontFileUrl = null,
 }) => {
-  const isImage = frontFileUrl && frontFileName?.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+  const hasMedia = frontFile || frontFileUrl;
 
   return (
     <div className={`flashcardFrontTemplate ${readOnly ? "flashcardFrontTemplate--display" : ""}`}>
@@ -14,11 +17,17 @@ const FlashcardFrontTemplate = ({
       <div className="flashcardFrontTemplate__container">
         {readOnly ? (
           <>
-            <p className="flashcardFrontTemplate__text">
-              {frontText || frontFileName || "No front content"}
-            </p>
-            {isImage && (
-              <img src={frontFileUrl} alt="Front" className="flashcardFrontTemplate__media" />
+            {frontText && <p className="flashcardFrontTemplate__text">{frontText}</p>}
+            {hasMedia && (
+              <MediaPreview
+                file={frontFile}
+                fileUrl={frontFileUrl}
+                fileName={frontFileName}
+                alt="Front of flashcard"
+              />
+            )}
+            {!frontText && !hasMedia && (
+              <p className="flashcardFrontTemplate__text">No front content</p>
             )}
           </>
         ) : (
@@ -29,7 +38,18 @@ const FlashcardFrontTemplate = ({
               value={frontText}
               onChange={(e) => onFrontTextChange(e.target.value)}
             />
-            <input type="file" accept="image/*,audio/*,video/*" onChange={onFrontFileChange} />
+            <label className="flashcardFrontTemplate__upload">
+              Upload image, audio, or video
+              <input type="file" accept="image/*,audio/*,video/*" onChange={onFrontFileChange} hidden />
+            </label>
+            {hasMedia && (
+              <MediaPreview
+                file={frontFile}
+                fileUrl={frontFileUrl}
+                fileName={frontFile?.name || frontFileName}
+                alt="Front preview"
+              />
+            )}
           </>
         )}
       </div>

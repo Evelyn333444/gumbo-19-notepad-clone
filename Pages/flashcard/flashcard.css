@@ -157,10 +157,20 @@
   word-break: break-word;
 }
 
-.flashcardFrontTemplate__media,
-.flashcardBackTemplate__media {
-  display: block;
-  max-width: 100%;
+.flashcardFrontTemplate__upload,
+.flashcardBackTemplate__upload {
+  display: inline-block;
   margin-top: 0.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.flashcardFrontTemplate__upload:hover,
+.flashcardBackTemplate__upload:hover {
+  background: #e2e8f0;
 }

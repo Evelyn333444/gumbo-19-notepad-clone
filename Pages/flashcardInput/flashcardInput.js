@@ -68,24 +68,20 @@ const FlashcardInput = () => {
       <h2>{isEditing ? "Edit Flashcard" : "Create a Flashcard"}</h2>
       <FlashcardFrontTemplate
         frontText={frontText}
+        frontFile={frontFile}
+        frontFileName={existingCard?.frontFileName}
+        frontFileUrl={!frontFile ? existingCard?.frontFileUrl : null}
         onFrontTextChange={setFrontText}
         onFrontFileChange={(e) => setFrontFile(e.target.files?.[0] || null)}
       />
-      {isEditing && existingCard?.frontFileName && !frontFile && (
-        <p className="flashcardTemplate__existingFile">
-          Current front file: {existingCard.frontFileName}
-        </p>
-      )}
       <FlashcardBackTemplate
         backText={backText}
+        backFile={backFile}
+        backFileName={existingCard?.backFileName}
+        backFileUrl={!backFile ? existingCard?.backFileUrl : null}
         onBackTextChange={setBackText}
         onBackFileChange={(e) => setBackFile(e.target.files?.[0] || null)}
       />
-      {isEditing && existingCard?.backFileName && !backFile && (
-        <p className="flashcardTemplate__existingFile">
-          Current back file: {existingCard.backFileName}
-        </p>
-      )}
       {error && <p style={{ color: "#dc2626" }}>{error}</p>}
       <button className="createFlashcard" type="button" onClick={handleSave}>
         {isEditing ? "Save changes" : "Create"}

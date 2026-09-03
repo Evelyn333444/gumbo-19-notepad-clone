@@ -1,12 +1,15 @@
+import MediaPreview from "../mediaPreview/mediaPreview";
+
 const FlashcardBackTemplate = ({
   backText = "",
   onBackTextChange,
   onBackFileChange,
   readOnly = false,
+  backFile = null,
   backFileName = null,
   backFileUrl = null,
 }) => {
-  const isImage = backFileUrl && backFileName?.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+  const hasMedia = backFile || backFileUrl;
 
   return (
     <div className={`flashcardBackTemplate ${readOnly ? "flashcardBackTemplate--display" : ""}`}>
@@ -14,11 +17,17 @@ const FlashcardBackTemplate = ({
       <div className="flashcardBackTemplate__container">
         {readOnly ? (
           <>
-            <p className="flashcardBackTemplate__text">
-              {backText || backFileName || "No back content"}
-            </p>
-            {isImage && (
-              <img src={backFileUrl} alt="Back" className="flashcardBackTemplate__media" />
+            {backText && <p className="flashcardBackTemplate__text">{backText}</p>}
+            {hasMedia && (
+              <MediaPreview
+                file={backFile}
+                fileUrl={backFileUrl}
+                fileName={backFileName}
+                alt="Back of flashcard"
+              />
+            )}
+            {!backText && !hasMedia && (
+              <p className="flashcardBackTemplate__text">No back content</p>
             )}
           </>
         ) : (
@@ -29,7 +38,18 @@ const FlashcardBackTemplate = ({
               value={backText}
               onChange={(e) => onBackTextChange(e.target.value)}
             />
-            <input type="file" accept="image/*,audio/*,video/*" onChange={onBackFileChange} />
+            <label className="flashcardBackTemplate__upload">
+              Upload image, audio, or video
+              <input type="file" accept="image/*,audio/*,video/*" onChange={onBackFileChange} hidden />
+            </label>
+            {hasMedia && (
+              <MediaPreview
+                file={backFile}
+                fileUrl={backFileUrl}
+                fileName={backFile?.name || backFileName}
+                alt="Back preview"
+              />
+            )}
           </>
         )}
       </div>
