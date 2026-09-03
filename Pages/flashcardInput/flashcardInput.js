@@ -1,56 +1,101 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import FlashcardFrontTemplate from "../../Components/flashcardFrontTemplate/flashcardFrontTemplate";
 import FlashcardBackTemplate from "../../Components/flashcardBackTemplate/flashcardBackTemplate";
 import { useFlashcards } from "../../src/context/FlashcardContext.jsx";
 
 const FlashcardInput = () => {
   const navigate = useNavigate();
-  const { addFlashcard } = useFlashcards();
+  const { id } = useParams();
+  const { flashcards, addFlashcard, updateFlashcard } = useFlashcards();
+  const existingCard = id ? flashcards.find((card) => card.id === id) : null;
+  const isEditing = Boolean(id);
+
   const [frontText, setFrontText] = useState("");
   const [backText, setBackText] = useState("");
   const [frontFile, setFrontFile] = useState(null);
   const [backFile, setBackFile] = useState(null);
   const [error, setError] = useState("");
 
-  const handleCreate = () => {
-    if (!frontText.trim() && !frontFile) {
+  useEffect(() => {
+    if (isEditing && !existingCard) {
+      navigate("/flashcards", { replace: true });
+      return;
+    }
+    if (existingCard) {
+      setFrontText(existingCard.frontText || "");
+      setBackText(existingCard.backText || "");
+    }
+  }, [existingCard, isEditing, navigate]);
+
+  const handleSave = () => {
+    const hasFront = frontText.trim() || frontFile || existingCard?.frontFileName;
+    const hasBack = backText.trim() || backFile || existingCard?.backFileName;
+
+    if (!hasFront) {
       setError("Add text or a file for the front of the card.");
       return;
     }
-    if (!backText.trim() && !backFile) {
+    if (!hasBack) {
       setError("Add text or a file for the back of the card.");
       return;
     }
 
-    addFlashcard({
+    const cardData = {
       frontText: frontText.trim(),
       backText: backText.trim(),
-      frontFileName: frontFile?.name || null,
-      backFileName: backFile?.name || null,
-      frontFileUrl: frontFile ? URL.createObjectURL(frontFile) : null,
-      backFileUrl: backFile ? URL.createObjectURL(backFile) : null,
-    });
+      frontFileName: frontFile?.name ?? existingCard?.frontFileName ?? null,
+      backFileName: backFile?.name ?? existingCard?.backFileName ?? null,
+      frontFileUrl: frontFile
+        ? URL.createObjectURL(frontFile)
+        : existingCard?.frontFileUrl ?? null,
+      backFileUrl: backFile
+        ? URL.createObjectURL(backFile)
+        : existingCard?.backFileUrl ?? null,
+    };
+
+    if (isEditing) {
+      updateFlashcard(id, cardData);
+    } else {
+      addFlashcard(cardData);
+    }
 
     navigate("/flashcards");
   };
 
   return (
     <div className="flashcardTemplate">
-      <h2>Create a Flashcard</h2>
+      <h2>{isEditing ? "Edit Flashcard" : "Create a Flashcard"}</h2>
       <FlashcardFrontTemplate
         frontText={frontText}
         onFrontTextChange={setFrontText}
         onFrontFileChange={(e) => setFrontFile(e.target.files?.[0] || null)}
       />
+      {isEditing && existingCard?.frontFileName && !frontFile && (
+        <p className="flashcardTemplate__existingFile">
+          Current front file: {existingCard.frontFileName}
+        </p>
+      )}
       <FlashcardBackTemplate
         backText={backText}
         onBackTextChange={setBackText}
         onBackFileChange={(e) => setBackFile(e.target.files?.[0] || null)}
       />
+      {isEditing && existingCard?.backFileName && !backFile && (
+        <p className="flashcardTemplate__existingFile">
+          Current back file: {existingCard.backFileName}
+        </p>
+      )}
       {error && <p style={{ color: "#dc2626" }}>{error}</p>}
-      <button className="createFlashcard" type="button" onClick={handleCreate}>
-        Create
+      <button className="createFlashcard" type="button" onClick={handleSave}>
+        {isEditing ? "Save changes" : "Create"}
+      </button>
+      <button
+        className="flashcardTemplate__cancel"
+        type="button"
+        onClick={() => navigate("/flashcards")}
+      >
+        Cancel
       </button>
     </div>
   );

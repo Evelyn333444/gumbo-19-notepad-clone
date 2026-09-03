@@ -7,14 +7,76 @@
 }
 
 .finishedFlashcard {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 320px;
+}
+
+.finishedFlashcard__flip {
   all: unset;
   box-sizing: border-box;
   display: block;
   width: 100%;
-  max-width: 320px;
   min-height: 220px;
   perspective: 1000px;
   cursor: pointer;
+}
+
+.finishedFlashcard__delete {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 999px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.finishedFlashcard__delete:hover {
+  background: #b91c1c;
+}
+
+.deleteFlashcard--active {
+  background: #dc2626;
+  color: #fff;
+}
+
+.editFlashcard--active {
+  background: #2563eb;
+  color: #fff;
+}
+
+.finishedFlashcard__edit {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.finishedFlashcard__edit:hover {
+  background: #1d4ed8;
 }
 
 .finishedFlashcard__inner {

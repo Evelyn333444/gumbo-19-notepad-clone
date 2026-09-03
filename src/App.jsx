@@ -17,6 +17,7 @@ export default function App() {
       <Route path="/study-sets" element={<StudySets />} />
       <Route path="/flashcards" element={<Flashcard />} />
       <Route path="/flashcards/input" element={<FlashcardInput />} />
+      <Route path="/flashcards/input/:id" element={<FlashcardInput />} />
       <Route path="/notepad" element={<Notepad />} />
       <Route path="/learn" element={<Learn />} />
     </Routes>

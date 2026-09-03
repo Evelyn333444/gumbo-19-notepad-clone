@@ -26,8 +26,18 @@ export function FlashcardProvider({ children }) {
     setFlashcards((prev) => [...prev, { id: crypto.randomUUID(), ...card }]);
   };
 
+  const removeFlashcard = (id) => {
+    setFlashcards((prev) => prev.filter((card) => card.id !== id));
+  };
+
+  const updateFlashcard = (id, updates) => {
+    setFlashcards((prev) =>
+      prev.map((card) => (card.id === id ? { ...card, ...updates } : card))
+    );
+  };
+
   return (
-    <FlashcardContext.Provider value={{ flashcards, addFlashcard }}>
+    <FlashcardContext.Provider value={{ flashcards, addFlashcard, removeFlashcard, updateFlashcard }}>
       {children}
     </FlashcardContext.Provider>
   );

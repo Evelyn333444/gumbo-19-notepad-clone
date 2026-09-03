@@ -1,0 +1,19 @@
+.finishedFlashcard {
+  position: relative;
+}
+
+.finishedFlashcard__delete {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 999px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
