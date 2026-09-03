@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import Navbar from "../../Components/navbar/navbar";
 import HeaderFlash from "../../Components/headerFlash/headerFlash";
 import FooterFlash from "../../Components/footerFlash/footerFlash";
+import FinishedFlashcard from "../../Components/finishedFlashcard/finishedFlashcard";
 import { useFlashcards } from "../../src/context/FlashcardContext.jsx";
+import "./flashcard.css";
 
 const Flashcard = () => {
   const { flashcards } = useFlashcards();
@@ -25,20 +27,7 @@ const Flashcard = () => {
           <p>No flashcards yet. Click &quot;Add flashcards&quot; to create one.</p>
         ) : (
           flashcards.map((card) => (
-            <div key={card.id} className="finishedFlashcard">
-              <div className="finishedFlashcard__front">
-                <strong>Front:</strong> {card.frontText || card.frontFileName}
-                {card.frontFileUrl && card.frontFileName?.match(/\.(jpg|jpeg|png|gif|webp)$/i) && (
-                  <img src={card.frontFileUrl} alt="Front" style={{ maxWidth: "200px", display: "block" }} />
-                )}
-              </div>
-              <div className="finishedFlashcard__back">
-                <strong>Back:</strong> {card.backText || card.backFileName}
-                {card.backFileUrl && card.backFileName?.match(/\.(jpg|jpeg|png|gif|webp)$/i) && (
-                  <img src={card.backFileUrl} alt="Back" style={{ maxWidth: "200px", display: "block" }} />
-                )}
-              </div>
-            </div>
+            <FinishedFlashcard key={card.id} card={card} />
           ))
         )}
       </div>
