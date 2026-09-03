@@ -1,8 +1,26 @@
 import { useState } from "react";
+import { useStudySets } from "../../src/context/StudySetContext.jsx";
 
 const CreateStudySet = ({ onClose }) => {
+  const { addStudySet } = useStudySets();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+
+  const handleCreate = () => {
+    if (!title.trim()) {
+      setError("Enter a title for the study set.");
+      return;
+    }
+
+    addStudySet({
+      title: title.trim(),
+      description: description.trim(),
+      createdAt: new Date().toISOString(),
+    });
+
+    onClose();
+  };
 
   return (
     <div className="createStudySet">
@@ -21,7 +39,8 @@ const CreateStudySet = ({ onClose }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <button className="createStudySet__submit" type="button" onClick={onClose}>
+      {error && <p style={{ color: "#dc2626" }}>{error}</p>}
+      <button className="createStudySet__submit" type="button" onClick={handleCreate}>
         Create
       </button>
       <button className="createStudySet__cancel" type="button" onClick={onClose}>

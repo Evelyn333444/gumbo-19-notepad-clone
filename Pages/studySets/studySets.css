@@ -1,0 +1,14 @@
+.finishedStudySets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border: 2px solid black;
+}
+
+.finishedStudySets__empty {
+  margin: 0;
+  padding: 1.5rem;
+  border: 2px solid black;
+  color: #64748b;
+}

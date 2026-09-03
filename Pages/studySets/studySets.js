@@ -1,13 +1,20 @@
 import { useState } from "react";
 import CreateStudySet from "../../Components/createStudySet/createStudySet";
+import FinishedStudySet from "../../Components/finishedStudySet/finishedStudySet";
 import PendingStudySet from "../../Components/pendingStudySet/pendingStudySet";
+import { useStudySets } from "../../src/context/StudySetContext.jsx";
+import "./studySets.css";
 
 const StudySets = () => {
+  const { studySets } = useStudySets();
   const [showCreate, setShowCreate] = useState(false);
+
+  if (showCreate) {
+    return <CreateStudySet onClose={() => setShowCreate(false)} />;
+  }
 
   return (
     <div className="studySets">
-      {showCreate && <CreateStudySet onClose={() => setShowCreate(false)} />}
       <div className="studySets__container">
         <h1 className="studySets__title">Study Sets</h1>
         <div className="studySets__content">
@@ -27,7 +34,19 @@ const StudySets = () => {
             </p>
           </div>
           <div className="studySets__main">
-            <div className="studySets__created" />
+            <div className="studySets__created">
+              {studySets.length === 0 ? (
+                <p className="finishedStudySets__empty">
+                  No study sets yet. Click &quot;Create a New Study Set&quot; to create one.
+                </p>
+              ) : (
+                <div className="finishedStudySets">
+                  {studySets.map((studySet) => (
+                    <FinishedStudySet key={studySet.id} studySet={studySet} />
+                  ))}
+                </div>
+              )}
+            </div>
             <div className="studySets__pending">
               <PendingStudySet />
             </div>
