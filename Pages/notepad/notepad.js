@@ -1,7 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useOutletContext } from "react-router-dom";
 import { annotate } from "rough-notation";
+import { useNotepads } from "../../src/context/NotepadContext.jsx";
 
 const Notepad = () => {
+  const { studySet } = useOutletContext();
+  const { getNotepadByStudySet, saveNotepad } = useNotepads();
+  const notepad = getNotepadByStudySet(studySet.id);
+  const textareaRef = useRef(null);
+
   useEffect(() => {
     const activeNotations = {};
 
@@ -22,37 +29,30 @@ const Notepad = () => {
         element.replaceWith(element.cloneNode(true));
       });
     };
-  }, []);
+  }, [studySet.id]);
 
-  const speakBtn = document.getElementById('speakBtn');
-const userNotes = document.getElementById('userNotes');
+  const handleNotesChange = (event) => {
+    saveNotepad(studySet.id, event.target.value);
+  };
 
-speakBtn.addEventListener('click', () => {
-  // Check if browser supports speech synthesis
-  if ('speechSynthesis' in window) {
-    // Stop any ongoing speech
-    window.speechSynthesis.cancel();
+  const handleReadAloud = () => {
+    const textToRead = textareaRef.current?.value ?? "";
+    if (!textToRead.trim()) return;
 
-    const textToRead = userNotes.value;
-    if (textToRead.trim() === '') return;
-
-    const utterance = new SpeechSynthesisUtterance(textToRead);
-    
-    // Optional settings
-    utterance.rate = 1.0; // Speed (0.1 to 10)
-    utterance.pitch = 1.0; // Pitch (0 to 2)
-
-    // Speak the text
-    window.speechSynthesis.speak(utterance);
-  } else {
-    alert('Sorry, your browser does not support read-aloud audio.');
-  }
-});
-
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(textToRead);
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Sorry, your browser does not support read-aloud audio.");
+    }
+  };
 
   return (
     <div className="notepad">
-      <h2>Notepad</h2>
+      <h2>{studySet.title} — Notepad</h2>
       <div className="notepad__container">
         <div id="note-container">
           <p id="p-1" className="notatable">
@@ -62,9 +62,16 @@ speakBtn.addEventListener('click', () => {
             We must test this on at least three different environments.
           </p>
         </div>
-        <textarea className="userNotes" placeholder="Write your notes here..." />
-        <button className="speakBtn">Read Aloud</button>
-
+        <textarea
+          ref={textareaRef}
+          className="userNotes"
+          placeholder="Write your notes here..."
+          value={notepad.userNotes}
+          onChange={handleNotesChange}
+        />
+        <button className="speakBtn" type="button" onClick={handleReadAloud}>
+          Read Aloud
+        </button>
       </div>
     </div>
   );

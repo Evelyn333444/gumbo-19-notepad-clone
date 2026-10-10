@@ -1,0 +1,50 @@
+.studySetNavbar {
+  border-bottom: 2px solid #0f172a;
+  background: #fff;
+}
+
+.studySetNavbar__container {
+  padding: 1rem 1.5rem;
+}
+
+.studySetNavbar__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.studySetNavbar__back {
+  font-size: 0.875rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.studySetNavbar__back:hover {
+  text-decoration: underline;
+}
+
+.studySetNavbar__title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #0f172a;
+}
+
+.studySetNavbar__menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.studySetNavbar__menu a {
+  color: #0f172a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.studySetNavbar__menu a:hover {
+  color: #2563eb;
+}

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import { FlashcardProvider } from "./context/FlashcardContext.jsx";
 import { StudySetProvider } from "./context/StudySetContext.jsx";
+import { NotepadProvider } from "./context/NotepadContext.jsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
@@ -11,7 +12,9 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <FlashcardProvider>
         <StudySetProvider>
-          <App />
+          <NotepadProvider>
+            <App />
+          </NotepadProvider>
         </StudySetProvider>
       </FlashcardProvider>
     </BrowserRouter>

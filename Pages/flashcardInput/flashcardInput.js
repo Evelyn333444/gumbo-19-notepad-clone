@@ -6,7 +6,7 @@ import { useFlashcards } from "../../src/context/FlashcardContext.jsx";
 
 const FlashcardInput = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, studySetId } = useParams();
   const { flashcards, addFlashcard, updateFlashcard } = useFlashcards();
   const existingCard = id ? flashcards.find((card) => card.id === id) : null;
   const isEditing = Boolean(id);
@@ -17,16 +17,20 @@ const FlashcardInput = () => {
   const [backFile, setBackFile] = useState(null);
   const [error, setError] = useState("");
 
+  const flashcardsPath = studySetId
+    ? `/study-sets/${studySetId}/flashcards`
+    : "/flashcards";
+
   useEffect(() => {
     if (isEditing && !existingCard) {
-      navigate("/flashcards", { replace: true });
+      navigate(flashcardsPath, { replace: true });
       return;
     }
     if (existingCard) {
       setFrontText(existingCard.frontText || "");
       setBackText(existingCard.backText || "");
     }
-  }, [existingCard, isEditing, navigate]);
+  }, [existingCard, flashcardsPath, isEditing, navigate]);
 
   const handleSave = () => {
     const hasFront = frontText.trim() || frontFile || existingCard?.frontFileName;
@@ -52,6 +56,7 @@ const FlashcardInput = () => {
       backFileUrl: backFile
         ? URL.createObjectURL(backFile)
         : existingCard?.backFileUrl ?? null,
+      studySetId: existingCard?.studySetId ?? studySetId ?? null,
     };
 
     if (isEditing) {
@@ -60,7 +65,7 @@ const FlashcardInput = () => {
       addFlashcard(cardData);
     }
 
-    navigate("/flashcards");
+    navigate(flashcardsPath);
   };
 
   return (
@@ -89,7 +94,7 @@ const FlashcardInput = () => {
       <button
         className="flashcardTemplate__cancel"
         type="button"
-        onClick={() => navigate("/flashcards")}
+        onClick={() => navigate(flashcardsPath)}
       >
         Cancel
       </button>

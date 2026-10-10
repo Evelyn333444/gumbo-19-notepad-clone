@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import FlashcardFrontTemplate from "../flashcardFrontTemplate/flashcardFrontTemplate";
 import FlashcardBackTemplate from "../flashcardBackTemplate/flashcardBackTemplate";
 
-const FinishedFlashcard = ({ card, isDeleteMode, isEditMode, onDelete }) => {
+const FinishedFlashcard = ({ card, studySetId, isDeleteMode, isEditMode, onDelete }) => {
   const navigate = useNavigate();
   const [showBack, setShowBack] = useState(false);
+
+  const editPath = studySetId
+    ? `/study-sets/${studySetId}/flashcards/input/${card.id}`
+    : `/flashcards/input/${card.id}`;
 
   return (
     <div className="finishedFlashcard">
@@ -13,7 +17,7 @@ const FinishedFlashcard = ({ card, isDeleteMode, isEditMode, onDelete }) => {
         <button
           type="button"
           className="finishedFlashcard__edit"
-          onClick={() => navigate(`/flashcards/input/${card.id}`)}
+          onClick={() => navigate(editPath)}
           aria-label="Edit flashcard"
         >
           ✎

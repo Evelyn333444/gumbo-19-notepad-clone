@@ -5,47 +5,31 @@
   max-width: 320px;
 }
 
-.finishedStudySet__flip {
+.finishedStudySet__card {
   all: unset;
   box-sizing: border-box;
-  display: block;
-  width: 100%;
-  min-height: 220px;
-  perspective: 1000px;
-  cursor: pointer;
-}
-
-.finishedStudySet__inner {
-  position: relative;
-  width: 100%;
-  min-height: 180px;
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease;
-}
-
-.finishedStudySet--flipped .finishedStudySet__inner {
-  transform: rotateY(180deg);
-}
-
-.finishedStudySet__face {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  width: 100%;
+  min-height: 180px;
   padding: 1rem;
   border: 1px solid #cbd5e1;
   border-radius: 12px;
   background: #fff;
-  backface-visibility: hidden;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
 }
 
-.finishedStudySet__back {
-  transform: rotateY(180deg);
-  justify-content: center;
+.finishedStudySet__card:hover {
+  border-color: #94a3b8;
+}
+
+.finishedStudySet__header {
+  display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .finishedStudySet__label {
@@ -54,6 +38,13 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #64748b;
+}
+
+.finishedStudySet__date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
 }
 
 .finishedStudySet__title {
@@ -71,19 +62,4 @@
   line-height: 1.5;
   color: #334155;
   word-break: break-word;
-}
-
-.finishedStudySet__date {
-  margin: 0;
-  font-size: 1.125rem;
-  line-height: 1.5;
-  color: #0f172a;
-}
-
-.finishedStudySet__hint {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  color: #64748b;
-  text-align: center;
 }

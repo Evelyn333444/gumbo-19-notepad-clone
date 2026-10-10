@@ -1,0 +1,69 @@
+.studySetOverview {
+  padding: 1.5rem;
+}
+
+.studySetOverview__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.studySetOverview__label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.studySetOverview__date {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.studySetOverview__description {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.studySetOverview__intro {
+  margin: 0 0 1.5rem;
+  color: #64748b;
+}
+
+.studySetOverview__sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.studySetOverview__section {
+  display: block;
+  padding: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  text-decoration: none;
+  color: inherit;
+}
+
+.studySetOverview__section:hover {
+  border-color: #2563eb;
+}
+
+.studySetOverview__section h3 {
+  margin: 0 0 0.5rem;
+  color: #0f172a;
+}
+
+.studySetOverview__section p {
+  margin: 0;
+  color: #64748b;
+}
